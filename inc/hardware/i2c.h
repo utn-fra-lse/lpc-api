@@ -1,5 +1,5 @@
-#ifndef _I2C_H_
-#define _I2C_H_
+#ifndef _LSE_I2C_H_
+#define _LSE_I2C_H_
 
 #ifdef __LPC84X__
 #include "lpc845/fsl_i2c.h"
