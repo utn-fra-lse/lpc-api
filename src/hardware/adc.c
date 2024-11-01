@@ -148,5 +148,5 @@ uint16_t adc_seqb_read(void) {
 	// Inicio conversion
 	ADC_DoSoftwareTriggerConvSeqB(ADC0);
 	// Espero y leo
-	return _adc_read(adc_seqa_get_selected_input());
+	return _adc_read(adc_seqb_get_selected_input());
 }
