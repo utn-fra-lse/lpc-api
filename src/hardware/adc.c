@@ -150,3 +150,38 @@ uint16_t adc_seqb_read(void) {
 	// Espero y leo
 	return _adc_read(adc_seqb_get_selected_input());
 }
+
+/**
+ * @brief Habilita o deshabilita la interrupcion en una secuencia
+ * @param enabled true para habilitar, false para deshabilitar
+ * @param mask kADC_ConvSeqAInterruptEnable o kADC_ConvSeqBInterruptEnable
+ * @param irq nombre de la interrupcion en el NVIC (ADC0_SEQA_IRQn o ADC0_SEQB_IRQn)
+ */
+static void _adc_irq_set_enabled(bool enabled, uint32_t mask, IRQn_Type irq) {
+	// Habilito interrupcion para el ADC y en el NVIC
+	if(enabled) {
+	    ADC_EnableInterrupts(ADC0, mask);
+	    NVIC_EnableIRQ(irq);
+	}
+	else {
+		// Deshabilito interrupcion para el ADC y el NVIC
+		ADC_DisableInterrupts(ADC0, mask);
+		NVIC_DisableIRQ(irq);
+	}
+}
+
+/**
+ * @brief Habilita o deshabilita la interrupcion en la secuencia A
+ * @param enabled true para habilitar, false para deshabilitar
+ */
+void adc_seqa_irq_set_enabled(bool enabled) {
+	_adc_irq_set_enabled(enabled, kADC_ConvSeqAInterruptEnable, ADC0_SEQA_IRQn);
+}
+
+/**
+ * @brief Habilita o deshabilita la interrupcion en la secuencia B
+ * @param enabled true para habilitar, false para deshabilitar
+ */
+void adc_seqb_irq_set_enabled(bool enabled) {
+	_adc_irq_set_enabled(enabled, kADC_ConvSeqBInterruptEnable, ADC0_SEQB_IRQn);
+}
