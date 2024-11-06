@@ -20,15 +20,21 @@
 #define GPIO_FUNC_I2C3_SDA		kSWM_I2C3_SDA
 #define GPIO_FUNC_I2C3_SCL		kSWM_I2C3_SCL
 
+#define GPIO_FUNC_PWM_OUT0		kSWM_SCT_OUT0
+#define GPIO_FUNC_PWM_OUT1		kSWM_SCT_OUT1
+#define GPIO_FUNC_PWM_OUT2		kSWM_SCT_OUT2
+#define GPIO_FUNC_PWM_OUT3		kSWM_SCT_OUT3
+
 #endif
 
 // Prototipos
 
 void gpio_set_function(uint32_t gpio, gpio_function_t func);
+gpio_function_t gpio_get_function(uint32_t gpio);
 
 /**
  * @brief Inicializa el puerto para el GPIO elegido
- * @param gpio numero de gpio a usar
+ * @param gpio numero de GPIO a usar
  */
 static inline void gpio_init(uint32_t gpio) {
 	// Veo el numero de puerto de acuerdo al GPIO
@@ -38,8 +44,8 @@ static inline void gpio_init(uint32_t gpio) {
 }
 
 /**
- * @brief Configura una direccion para el gpio
- * @param gpio numero de gpio a configurar
+ * @brief Configura una direccion para el GPIO
+ * @param gpio numero de GPIO a configurar
  * @param direction true para salida, false para entrada
  */
 static inline void gpio_set_dir(uint32_t gpio, bool direction) {
@@ -52,7 +58,7 @@ static inline void gpio_set_dir(uint32_t gpio, bool direction) {
 
 /**
  * @brief Escribe un valor en una salida
- * @param gpio numero de gpio a escribir
+ * @param gpio numero de GPIO a escribir
  * @param output valor para escribir
  */
 static inline void gpio_put(uint32_t gpio, bool output) {
@@ -63,9 +69,9 @@ static inline void gpio_put(uint32_t gpio, bool output) {
 }
 
 /**
- * @brief Lee el valor de un gpio
- * @param gpio numero de gpio a leer
- * @return estado del gpio
+ * @brief Lee el valor de un GPIO
+ * @param gpio numero de GPIO a leer
+ * @return estado del GPIO
  */
 static inline bool gpio_get(uint32_t gpio) {
 	// Veo el numero de puerto de acuerdo al GPIO
